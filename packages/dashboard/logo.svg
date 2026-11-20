@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background subtle gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1A212B"/>
+      <stop offset="100%" stop-color="#0E1217"/>
+    </radialGradient>
+
+    <!-- Warm Terracotta & Ochre Gradients -->
+    <linearGradient id="arcTerracotta" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B4A"/>
+      <stop offset="100%" stop-color="#D94826"/>
+    </linearGradient>
+
+    <linearGradient id="arcGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+
+    <linearGradient id="arcAmber" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EA580C"/>
+    </linearGradient>
+
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+
+    <filter id="subtleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+  
+  <!-- Outer Subtle Ring Guide -->
+  <circle cx="256" cy="256" r="182" fill="none" stroke="#263140" stroke-width="2" stroke-dasharray="6 8"/>
+
+  <!-- Rotating Harmony Ring: 3 Interlocking Arc Petals (Solidarity / Circle of Trust) -->
+  <g transform="rotate(-15 256 256)">
+    <!-- Arc 1: Terracotta -->
+    <path d="M 256 94 A 162 162 0 0 1 396 175 C 370 200 338 215 304 218 C 295 168 274 126 256 94 Z" 
+          fill="url(#arcTerracotta)"/>
+
+    <!-- Arc 2: Golden Amber -->
+    <path d="M 418 256 A 162 162 0 0 1 316 405 C 310 370 292 340 264 318 C 314 310 355 289 418 256 Z" 
+          fill="url(#arcGold)"/>
+
+    <!-- Arc 3: Warm Ochre -->
+    <path d="M 218 412 A 162 162 0 0 1 96 230 C 130 236 162 254 184 282 C 190 332 202 374 218 412 Z" 
+          fill="url(#arcAmber)"/>
+  </g>
+
+  <!-- Central Solid Circle Core (The Community Pot Vault) -->
+  <circle cx="256" cy="256" r="92" fill="#131922" stroke="#2E3A4B" stroke-width="3"/>
+  <circle cx="256" cy="256" r="82" fill="#18202C"/>
+
+  <!-- Central Satoshi Lightning Spark (Pure Geometry, Precision Bevels) -->
+  <g filter="url(#subtleGlow)">
+    <!-- Main Bolt Silhouette -->
+    <polygon points="268,188 232,252 262,252 244,324 286,244 256,244" 
+             fill="url(#boltGrad)"/>
+    <!-- Crisp Satoshi Diamond Core -->
+    <circle cx="256" cy="256" r="5" fill="#D94826"/>
+  </g>
+
+  <!-- Surrounding Node Accents (3 Trust Guardians) -->
+  <circle cx="256" cy="74" r="8" fill="#FF6B4A"/>
+  <circle cx="414" cy="347" r="8" fill="#FBBF24"/>
+  <circle cx="98" cy="347" r="8" fill="#F59E0B"/>
+</svg>
+

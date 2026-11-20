@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # Sats Sacco Core Backend Server & Companion Web Dashboard
+  sats-sacco-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["pnpm", "dev:server"]
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+      - DATABASE_PATH=/app/data/sats_sacco.db
+      - LOG_SALT=${LOG_SALT:-sats_sacco_salt_key}
+      - LNBITS_BASE_URL=${LNBITS_BASE_URL:-https://testnet.lnbits.com}
+      - LNBITS_ADMIN_KEY=${LNBITS_ADMIN_KEY}
+      - LNBITS_INVOICE_READ_KEY=${LNBITS_INVOICE_READ_KEY}
+      - NOSTR_RELAYS=${NOSTR_RELAYS:-wss://relay.damus.io,wss://nos.lol,wss://relay.primal.net}
+      - NOSTR_PRIVATE_KEY_HEX=${NOSTR_PRIVATE_KEY_HEX}
+      - AI_PROVIDER=${AI_PROVIDER:-gemini}
+      - AI_API_KEY=${AI_API_KEY}
+    volumes:
+      - sacco-data:/app/data
+    restart: unless-stopped
+
+  # Sats Sacco Telegram Bot Runner
+  sats-sacco-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["pnpm", "dev:bot"]
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - DATABASE_PATH=/app/data/sats_sacco.db
+      - LNBITS_BASE_URL=${LNBITS_BASE_URL:-https://testnet.lnbits.com}
+      - LNBITS_ADMIN_KEY=${LNBITS_ADMIN_KEY}
+      - LNBITS_INVOICE_READ_KEY=${LNBITS_INVOICE_READ_KEY}
+      - NOSTR_RELAYS=${NOSTR_RELAYS:-wss://relay.damus.io,wss://nos.lol,wss://relay.primal.net}
+      - AI_PROVIDER=${AI_PROVIDER:-gemini}
+      - AI_API_KEY=${AI_API_KEY}
+    volumes:
+      - sacco-data:/app/data
+    depends_on:
+      - sats-sacco-server
+    restart: unless-stopped
+
+volumes:
+  sacco-data:
+    driver: local
+
